@@ -1,10 +1,10 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import HomePage from '../HomePage/HomePage';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Link>About</Link>
+      <HomePage></HomePage>
     </div>
   );
 }
