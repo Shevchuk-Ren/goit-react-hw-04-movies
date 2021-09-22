@@ -1,18 +1,20 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import HomePage from '../HomePage/HomePage';
-import HomeView from '../HomeView/HomeView';
-import MoviesView from '../MoviesView/MoviesView';
+import AppBar from '../AppBar/AppBar';
+
+import HomePage from '../HomePage';
+import MoviesPage from '../MoviesPage';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <HomePage></HomePage>
+      <AppBar></AppBar>
       <Route exact path="/">
-        <HomeView></HomeView>
+        <HomePage />
       </Route>
       <Route exact path="/movies">
-        <MoviesView></MoviesView>
+        <MoviesPage />
       </Route>
     </div>
   );
