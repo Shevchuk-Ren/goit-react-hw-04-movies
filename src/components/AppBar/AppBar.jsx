@@ -8,7 +8,7 @@ export default function AppBar() {
         <header className='header'>
             <nav>
                 <NavLink exact className='home-link' to='/' activeClassName='activelink'>Home</NavLink>
-            <NavLink className='home-link' to='/movies' activeClassName='activelink'>Movies</NavLink> 
+                <NavLink className='home-link' to='/movies' activeClassName='activelink'>Movies</NavLink> 
             </nav>
            
         </header>
