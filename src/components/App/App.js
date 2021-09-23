@@ -1,6 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import AppBar from '../AppBar/AppBar';
 import HomePage from '../HomePage';
+import MovieDetailsPage from '../MovieDetailsPage/MovieDetailsPage';
 import MoviesPage from '../MoviesPage';
 import NotFoundView from '../NotFoundView/NotFoundView';
 
@@ -14,7 +15,11 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path="/movies">
+
+        <Route path="/movies/:movieId">
+          <MovieDetailsPage />
+        </Route>
+        <Route path="/movies">
           <MoviesPage />
         </Route>
         <Route>
