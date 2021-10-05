@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { Route, useParams, Link } from 'react-router-dom';
+import { Route, useParams, Link, useHistory } from 'react-router-dom';
 
 import './MovieDetailsPag.css';
 import Cast from '../Cast/Cast';
@@ -11,13 +11,13 @@ export default function MovieDetailsPage() {
   let queryParams = `https://api.themoviedb.org/3/movie/${movieId}?`;
 
   const [movie, setMovie] = useState([]);
-  console.log(URL);
+  const history = useHistory();
+  console.log(movieId, `quy`);
 
   useEffect(() => {
     apiFetch
       .fetchApi(queryParams)
       .then(movie => {
-        console.log(movie);
         setMovie(movie);
       })
       .catch(error => {
@@ -35,12 +35,18 @@ export default function MovieDetailsPage() {
     return movie.poster_path ? movie.poster_path : movie.backdrop_path;
   };
   return (
-    <div>
-      <div className="wrap-page">
+    <div key={movieId}>
+      <div className="wrap-page" key={movieId}>
         <div>
-          {' '}
+          <button
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            Back
+          </button>
           <img
-            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${createPoster()}`}
             alt={createName() ? createName() : 'No info'}
             width="300"
           />
@@ -61,15 +67,19 @@ export default function MovieDetailsPage() {
         </div>
       </div>
       <div className="wrap-dop">
-        <Link to={`/movies/${movieId}/cast`}>Cast </Link>
-        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        <Link key="1" to={`/goit-react-hw-05-movies/movies/${movieId}/cast`}>
+          Cast{' '}
+        </Link>
+        <Link key="2" to={`/goit-react-hw-05-movies/movies/${movieId}/reviews`}>
+          Reviews
+        </Link>
       </div>
       <div>
-        <Route path="/movies/:movieId/cast">
-          <Cast></Cast>
+        <Route path="/goit-react-hw-05-movies/movies/:movieId/cast">
+          <Cast />
         </Route>
-        <Route path="/movies/:movieId/reviews">
-          <Reviews></Reviews>
+        <Route path="/goit-react-hw-05-movies/movies/:movieId/reviews">
+          <Reviews />
         </Route>
       </div>
     </div>

@@ -12,14 +12,17 @@ function App() {
     <div className="App">
       <AppBar></AppBar>
       <Switch>
-        <Route exact path="/">
+        {/* <Route exact path="/">
+          <HomePage />
+        </Route> */}
+        <Route exact path="/goit-react-hw-05-movies">
           <HomePage />
         </Route>
 
-        <Route path="/movies/:movieId">
+        <Route path="/goit-react-hw-05-movies/movies/:movieId">
           <MovieDetailsPage />
         </Route>
-        <Route path="/movies">
+        <Route path="/goit-react-hw-05-movies/movies">
           <MoviesPage />
         </Route>
         <Route>

@@ -26,8 +26,8 @@ export default function Reviews(params) {
     <div>
       <ul>
         {reviews &&
-          reviews.map(({ author, content }) => (
-            <li>
+          reviews.map(({ author, content, id }) => (
+            <li rey={id}>
               <h3>{author}</h3>
               <p>{content}</p>
             </li>

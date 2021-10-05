@@ -27,8 +27,8 @@ export default function Cast(params) {
       <p>Additional Information</p>
       <ul>
         {cast &&
-          cast.map(({ name, profile_path, character }) => (
-            <li>
+          cast.map(({ name, profile_path, character, id }) => (
+            <li key={id}>
               <img
                 src={`https://image.tmdb.org/t/p/original${profile_path}`}
                 alt={name}
