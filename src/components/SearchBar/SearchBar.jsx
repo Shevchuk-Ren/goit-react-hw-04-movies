@@ -23,7 +23,7 @@ export default function Searchbar({ onSubmit }) {
     // console.log(search, `daaa`)
     // if (search.trim() === '') {
 
-    //     setSearch('');
+    setSearch('');
 
     //     return;
 
@@ -31,8 +31,8 @@ export default function Searchbar({ onSubmit }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-wrap">
+      <form className="form" onSubmit={handleSubmit}>
         <input
           className="SearchForm-input"
           type="text"
@@ -42,7 +42,7 @@ export default function Searchbar({ onSubmit }) {
           autoFocus
           placeholder="Search images and photos"
         />
-        <button type="submit" aria-label="Search">
+        <button className="form-btn" type="submit" aria-label="Search">
           Search
         </button>
       </form>

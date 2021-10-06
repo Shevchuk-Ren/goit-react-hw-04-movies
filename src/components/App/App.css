@@ -12,7 +12,15 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+  /* text-decoration: none; */
+  color: rgba(0, 0, 0, 0.7);
+}
 .App-header {
   /* background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +43,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+.form-wrap {
+  /* padding: 20px; */
+  margin-bottom: 20px;
+}
+.SearchForm-input {
+  width: 250px;
+  height: 30px;
+  margin-right: 10px;
+}
+.form-btn {
+  width: 100px;
+  height: 35px;
+  background-color: snow;
+}
+.form-btn:hover {
+  background-color: salmon;
+  color: snow;
+}
+.movies-item,
+.home-item {
+  font-weight: 500;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+.movies-item:hover {
+  color: salmon;
+}
+.movies-wrap,
+.home-wrap {
+  padding: 20px;
 }

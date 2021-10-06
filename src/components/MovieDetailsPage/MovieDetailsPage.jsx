@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { Route, useParams, Link, useHistory } from 'react-router-dom';
+import {
+  Route,
+  useParams,
+  NavLink,
+  useHistory,
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
 
 import './MovieDetailsPag.css';
 import Cast from '../Cast/Cast';
@@ -11,7 +18,10 @@ export default function MovieDetailsPage() {
   let queryParams = `https://api.themoviedb.org/3/movie/${movieId}?`;
 
   const [movie, setMovie] = useState([]);
+  const { url } = useRouteMatch();
   const history = useHistory();
+  const location = useLocation();
+
   console.log(movieId, `quy`);
 
   useEffect(() => {
@@ -28,6 +38,18 @@ export default function MovieDetailsPage() {
     //     cleanup
     // }
   }, [queryParams]);
+
+  const handleGoBack = () => {
+    console.log(url, 'url');
+    console.log(history, `HISTORY`);
+    console.log(location.pathname);
+    if (location.pathname === url) {
+      history.goBack();
+      return;
+    }
+
+    history.push(location.state.from);
+  };
   const createName = () => {
     return movie.title ? movie.title : movie.original_title;
   };
@@ -35,44 +57,58 @@ export default function MovieDetailsPage() {
     return movie.poster_path ? movie.poster_path : movie.backdrop_path;
   };
   return (
-    <div key={movieId}>
-      <div className="wrap-page" key={movieId}>
+    <div className="wrap-page">
+      <button className="page-btn" onClick={handleGoBack}>
+        Go Back
+      </button>
+      <div className="card-page">
         <div>
-          <button
-            onClick={() => {
-              history.goBack();
-            }}
-          >
-            Back
-          </button>
           <img
             src={`https://image.tmdb.org/t/p/original${createPoster()}`}
             alt={createName() ? createName() : 'No info'}
             width="300"
           />
         </div>
-        <div>
+        <div className="description-page">
           <h1>
             {createName() ? createName() : 'No info'}
             <span>({parseInt(movie.release_date)})</span>
           </h1>
-          <p>User scope: </p>
+          <p className="scope-page">
+            User scope: <span>{movie.vote_average * 10}% </span>
+          </p>
           <h2>Overview</h2>
           <p>{movie.overview}</p>
           <h2>Genres</h2>
-          <p>
+          <p className="genres-page">
             {movie.genres &&
               movie.genres.map(({ name }) => <span>{name}</span>)}
           </p>
         </div>
       </div>
       <div className="wrap-dop">
-        <Link key="1" to={`/goit-react-hw-05-movies/movies/${movieId}/cast`}>
+        <NavLink
+          className="link-page"
+          key="1"
+          to={{
+            pathname: `/goit-react-hw-05-movies/movies/${movieId}/cast`,
+            state: { from: `${window.localStorage.getItem('url')}` },
+          }}
+          activeClassName="activelink"
+        >
           Cast{' '}
-        </Link>
-        <Link key="2" to={`/goit-react-hw-05-movies/movies/${movieId}/reviews`}>
+        </NavLink>
+        <NavLink
+          className="link-page"
+          key="2"
+          to={{
+            pathname: `/goit-react-hw-05-movies/movies/${movieId}/reviews`,
+            state: { from: `${window.localStorage.getItem('url')}` },
+          }}
+          activeClassName="activelink"
+        >
           Reviews
-        </Link>
+        </NavLink>
       </div>
       <div>
         <Route path="/goit-react-hw-05-movies/movies/:movieId/cast">

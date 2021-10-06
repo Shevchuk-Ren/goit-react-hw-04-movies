@@ -7,6 +7,7 @@ import {
   useParams,
   useHistory,
   useLocation,
+  useRouteMatch,
   Link,
 } from 'react-router-dom';
 import Searchbar from '../SearchBar/SearchBar';
@@ -26,12 +27,18 @@ export default function MoviesPage(params) {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useLocalStorage('movies', []);
   const location = useLocation();
+  const { url } = useRouteMatch();
+  console.log(url);
   let queryParams = `https://api.themoviedb.org/3/search/movie?`;
 
   useEffect(() => {
     if (location.search === '') {
       window.localStorage.clear();
       setMovies([]);
+      return;
+    }
+    if (!query) {
+      console.log(`вы зашли в movies`);
       return;
     }
 
@@ -51,28 +58,34 @@ export default function MoviesPage(params) {
     // return () => {
     //     cleanup
     // }
-  }, [query, queryParams, location.search, setMovies]);
+  }, [location.search, query, queryParams, setMovies]);
 
   const handleSubmit = search => {
+    //  window.localStorage.setItem('search', search);
+    window.localStorage.setItem('url', url + `?query=${search}`);
     setQuery(search);
+    console.log(url, `url`);
   };
 
   return (
-    <div>
+    <div className="movies-wrap">
       <Searchbar onSubmit={handleSubmit}></Searchbar>
 
       {movies.length !== 0 ? (
-        <ul>
+        <ul className="movies-list">
           {movies.map(({ name, original_title, id }) => (
             <li key={id}>
-              <Link to={`/goit-react-hw-05-movies/movies/${id}`}>
+              <NavLink
+                className="movies-item"
+                to={`/goit-react-hw-05-movies/movies/${id}`}
+              >
                 {name ? name : original_title}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
       ) : (
-        <li>Enter correct film's name</li>
+        <p>Enter correct film's name</p>
       )}
     </div>
   );
