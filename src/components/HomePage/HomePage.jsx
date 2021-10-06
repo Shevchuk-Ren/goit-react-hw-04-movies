@@ -13,7 +13,7 @@ export default function HomePage(params) {
     });
 
     return () => {};
-  }, []);
+  }, [url]);
   return (
     <div className="home-wrap">
       <h1>Trending today</h1>

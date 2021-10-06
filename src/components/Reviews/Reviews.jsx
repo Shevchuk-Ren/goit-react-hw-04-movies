@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { Route, NavLink, useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Reviews(params) {
   const { movieId } = useParams();
@@ -12,6 +12,7 @@ export default function Reviews(params) {
     apiFetch
       .fetchApi(queryParams)
       .then(reviews => {
+        console.log(reviews, `reviews`);
         setReviews(reviews.results);
       })
       .catch(error => {
@@ -22,14 +23,34 @@ export default function Reviews(params) {
     //     cleanup
     // }
   }, [queryParams]);
+
+  const createAvatar = avatar => {
+    console.log(avatar);
+    if (avatar) {
+      return avatar.startsWith('/https')
+        ? avatar.slice(1)
+        : `https://image.tmdb.org/t/p/original${avatar}`;
+    }
+    //  return avatar.startsWith('https') ? avatar :`https://image.tmdb.org/t/p/original${avatar}`;
+  };
   return (
-    <div>
-      <ul>
+    <div className="reviews-wrap">
+      <ul className="reviews-list">
         {reviews &&
-          reviews.map(({ author, content, id }) => (
-            <li rey={id}>
-              <h3>{author}</h3>
-              <p>{content}</p>
+          reviews.map(({ author, content, id, author_details }) => (
+            <li className="reviews-item" key={id}>
+              <div className="reviews-profile">
+                <h3>{author}</h3>
+                <img
+                  className="reviews-img"
+                  key={author_details.id}
+                  src={createAvatar(author_details.avatar_path)}
+                  alt=""
+                  width="100"
+                />
+              </div>
+
+              <p className="reviews-description">{content}</p>
             </li>
           ))}
       </ul>

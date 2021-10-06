@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { Route, NavLink, useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Cast(params) {
   const { movieId } = useParams();
@@ -12,6 +12,7 @@ export default function Cast(params) {
     apiFetch
       .fetchApi(queryParams)
       .then(actors => {
+        console.log(actors, `actors`);
         setCast(actors.cast);
       })
       .catch(error => {
@@ -23,12 +24,12 @@ export default function Cast(params) {
     // }
   }, [queryParams]);
   return (
-    <div>
+    <div className="cast-wrap">
       <p>Additional Information</p>
-      <ul>
+      <ul className="cast-list">
         {cast &&
           cast.map(({ name, profile_path, character, id }) => (
-            <li key={id}>
+            <li className="cast-item" key={id}>
               <img
                 src={`https://image.tmdb.org/t/p/original${profile_path}`}
                 alt={name}

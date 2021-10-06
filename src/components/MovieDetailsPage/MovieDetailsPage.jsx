@@ -28,6 +28,7 @@ export default function MovieDetailsPage() {
     apiFetch
       .fetchApi(queryParams)
       .then(movie => {
+        console.log(movie, `movie`);
         setMovie(movie);
       })
       .catch(error => {
@@ -82,7 +83,7 @@ export default function MovieDetailsPage() {
           <h2>Genres</h2>
           <p className="genres-page">
             {movie.genres &&
-              movie.genres.map(({ name }) => <span>{name}</span>)}
+              movie.genres.map(({ name, id }) => <span key={id}>{name}</span>)}
           </p>
         </div>
       </div>

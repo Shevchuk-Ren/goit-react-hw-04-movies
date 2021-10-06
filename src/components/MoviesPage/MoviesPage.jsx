@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import {
-  BrowserRouter,
-  Route,
-  NavLink,
-  useParams,
-  useHistory,
-  useLocation,
-  useRouteMatch,
-  Link,
-} from 'react-router-dom';
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import Searchbar from '../SearchBar/SearchBar';
 
 const useLocalStorage = (key, defaultValue) => {
