@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 export default function Reviews(params) {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  // const [status, setStatus] = useState('idle');
+  // const history = useHistory();
 
   let queryParams = `https://api.themoviedb.org/3/movie/${movieId}/reviews?`;
 
@@ -12,20 +14,14 @@ export default function Reviews(params) {
     apiFetch
       .fetchApi(queryParams)
       .then(reviews => {
-        console.log(reviews, `reviews`);
         setReviews(reviews.results);
       })
       .catch(error => {
         console.log(error);
       });
-
-    // return () => {
-    //     cleanup
-    // }
   }, [queryParams]);
 
   const createAvatar = avatar => {
-    console.log(avatar);
     if (avatar) {
       return avatar.startsWith('/https')
         ? avatar.slice(1)
@@ -33,6 +29,7 @@ export default function Reviews(params) {
     }
     //  return avatar.startsWith('https') ? avatar :`https://image.tmdb.org/t/p/original${avatar}`;
   };
+
   return (
     <div className="reviews-wrap">
       <ul className="reviews-list">

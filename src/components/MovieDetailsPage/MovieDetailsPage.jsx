@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
+import noUser from '../../images/noUser.jpg';
 import {
   Route,
   useParams,
@@ -10,8 +11,13 @@ import {
 } from 'react-router-dom';
 
 import './MovieDetailsPag.css';
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
+// import Cast from '../Cast/Cast';
+// import Reviews from '../Reviews/Reviews';
+
+const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast" */));
+const Reviews = lazy(() =>
+  import('../Reviews/Reviews' /*webpackChunkName: "reviews" */),
+);
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -28,22 +34,20 @@ export default function MovieDetailsPage() {
     apiFetch
       .fetchApi(queryParams)
       .then(movie => {
-        console.log(movie, `movie`);
+        console.log(movie.genres, `movie`);
+
         setMovie(movie);
       })
       .catch(error => {
         console.log(error);
       });
-
-    // return () => {
-    //     cleanup
-    // }
   }, [queryParams]);
 
   const handleGoBack = () => {
+    console.log(url, `url`);
     console.log(url, 'url');
     console.log(history, `HISTORY`);
-    console.log(location.pathname);
+
     if (location.pathname === url) {
       history.goBack();
       return;
@@ -51,21 +55,31 @@ export default function MovieDetailsPage() {
 
     history.push(location.state.from);
   };
+
   const createName = () => {
     return movie.title ? movie.title : movie.original_title;
   };
   const createPoster = () => {
-    return movie.poster_path ? movie.poster_path : movie.backdrop_path;
+    console.log(`https://image.tmdb.org/t/p/original${movie.poster_path}`);
+    // return movie.poster_path ?  `https://image.tmdb.org/t/p/original${movie.poster_path}` : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+
+    if (movie.poster_path) {
+      return `https://image.tmdb.org/t/p/original${movie.poster_path}`;
+    } else if (movie.backdrop_path) {
+      return `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+    }
+
+    return noUser;
   };
   return (
     <div className="wrap-page">
-      <button className="page-btn" onClick={handleGoBack}>
+      <button type="button" className="page-btn" onClick={handleGoBack}>
         Go Back
       </button>
       <div className="card-page">
         <div>
           <img
-            src={`https://image.tmdb.org/t/p/original${createPoster()}`}
+            src={createPoster()}
             alt={createName() ? createName() : 'No info'}
             width="300"
           />
@@ -95,9 +109,14 @@ export default function MovieDetailsPage() {
             pathname: `/goit-react-hw-05-movies/movies/${movieId}/cast`,
             state: { from: `${window.localStorage.getItem('url')}` },
           }}
+          //  to={{
+          //   pathname: `/goit-react-hw-05-movies/movies/${movieId}/cast`,
+          //   state: { from: location },
+          // }}
+
           activeClassName="activelink"
         >
-          Cast{' '}
+          Cast
         </NavLink>
         <NavLink
           className="link-page"
@@ -106,18 +125,31 @@ export default function MovieDetailsPage() {
             pathname: `/goit-react-hw-05-movies/movies/${movieId}/reviews`,
             state: { from: `${window.localStorage.getItem('url')}` },
           }}
+          //     to={{
+          // pathname: `/goit-react-hw-05-movies/movies/${movieId}/reviews`,
+          // state: { from:location },
+          //     }}
+
           activeClassName="activelink"
         >
           Reviews
         </NavLink>
       </div>
       <div>
-        <Route path="/goit-react-hw-05-movies/movies/:movieId/cast">
-          <Cast />
-        </Route>
-        <Route path="/goit-react-hw-05-movies/movies/:movieId/reviews">
-          <Reviews />
-        </Route>
+        <Suspense
+          fallback={
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          }
+        >
+          <Route path="/goit-react-hw-05-movies/movies/:movieId/cast">
+            <Cast />
+          </Route>
+          <Route path="/goit-react-hw-05-movies/movies/:movieId/reviews">
+            <Reviews />
+          </Route>
+        </Suspense>
       </div>
     </div>
   );
