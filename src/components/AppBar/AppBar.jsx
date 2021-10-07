@@ -1,27 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './AppBar.css';
+
+import { AppBarLink, Navigation } from './AppBar.styled.';
 
 export default function AppBar() {
   return (
-    <header className="header">
+    <Navigation>
       <nav>
-        <NavLink
-          exact
-          className="home-link"
-          to="/"
-          activeClassName="activelink"
-        >
+        <AppBarLink exact to="/" activeClassName="activelink">
           Home
-        </NavLink>
-        <NavLink
-          className="home-link"
-          to="/movies"
-          activeClassName="activelink"
-        >
+        </AppBarLink>
+        <AppBarLink to="/movies" activeClassName="activelink">
           Movies
-        </NavLink>
+        </AppBarLink>
       </nav>
-    </header>
+    </Navigation>
   );
 }

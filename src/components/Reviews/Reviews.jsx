@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Item, Profile, Wrapper, Avatar } from './Reviews.styled';
 
 export default function Reviews(params) {
   const { movieId } = useParams();
@@ -30,28 +31,28 @@ export default function Reviews(params) {
   };
 
   return (
-    <div className="reviews-wrap">
+    <Wrapper>
       <ul className="reviews-list">
         {reviews &&
           reviews.map(({ author, content, id, author_details }) => (
-            <li className="reviews-item" key={id}>
-              <div className="reviews-profile">
+            <Item key={id}>
+              <Profile>
                 <h3>{author}</h3>
-                <img
+                <Avatar
                   className="reviews-img"
                   key={author_details.id}
                   src={createAvatar(author_details.avatar_path)}
                   alt=""
                   width="100"
                 />
-              </div>
+              </Profile>
 
               <p className="reviews-description">{content}</p>
-            </li>
+            </Item>
           ))}
       </ul>
       {reviews.length === 0 && <p>We don't have ane reviews for this movie.</p>}
-    </div>
+    </Wrapper>
   );
 }
 

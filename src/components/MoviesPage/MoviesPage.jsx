@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
-import Searchbar from '../SearchBar/SearchBar';
+import Searchbar from '../SearchBar';
+import { Item, Wrapper } from './MoviesPage.styled';
 
 const useLocalStorage = (key, defaultValue) => {
   const [state, setState] = useState(() => {
@@ -54,30 +55,30 @@ export default function MoviesPage(params) {
 
   if (status === 'idle') {
     return (
-      <div className="movies-wrap">
+      <Wrapper>
         <Searchbar onSubmit={handleSubmit}></Searchbar>
-      </div>
+      </Wrapper>
     );
   }
   if (status === 'pending') {
     return (
-      <div className="movies-wrap">
+      <Wrapper>
         <Searchbar onSubmit={handleSubmit}></Searchbar>
         <p>Loading...</p>
-      </div>
+      </Wrapper>
     );
   }
 
   if (status === 'resolved') {
     return (
-      <div className="movies-wrap">
+      <Wrapper>
         <Searchbar onSubmit={handleSubmit}></Searchbar>
 
         {movies.length !== 0 ? (
           <ul className="movies-list">
             {movies.map(({ name, original_title, id }) => (
               <li key={id}>
-                <NavLink
+                <Item
                   className="movies-item"
                   to={{
                     pathname: `/movies/${id}`,
@@ -85,14 +86,14 @@ export default function MoviesPage(params) {
                   }}
                 >
                   {name ? name : original_title}
-                </NavLink>
+                </Item>
               </li>
             ))}
           </ul>
         ) : (
           <p>Enter correct film's name</p>
         )}
-      </div>
+      </Wrapper>
     );
   }
 }

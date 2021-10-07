@@ -1,18 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import AppBar from '../AppBar/AppBar';
-// import HomePage from '../HomePage';
-// import MovieDetailsPage from '../MovieDetailsPage/MovieDetailsPage';
-// import MoviesPage from '../MoviesPage';
-// import NotFoundView from '../NotFoundView/NotFoundView';
-import './App.css';
+import AppBar from '../AppBar';
+import { Container } from './App.styled';
 
 const HomePage = lazy(() =>
   import('../HomePage' /*webpackChunkName: "home-page" */),
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    '../MovieDetailsPage/MovieDetailsPage.jsx' /*webpackChunkName: "movie-detail-page" */
+    '../MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-detail-page" */
   ),
 );
 const MoviesPage = lazy(() =>
@@ -24,7 +20,7 @@ const NotFoundView = lazy(() =>
 
 function App() {
   return (
-    <div className="App">
+    <Container>
       <AppBar></AppBar>
       <Suspense
         fallback={
@@ -49,7 +45,7 @@ function App() {
           </Route>
         </Switch>
       </Suspense>
-    </div>
+    </Container>
   );
 }
 

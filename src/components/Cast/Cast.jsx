@@ -3,6 +3,7 @@ import apiFetch from '../../services/fetch/fetch-api';
 import { useParams } from 'react-router-dom';
 import noUser from '../../images/noUser.jpg';
 import PropTypes from 'prop-types';
+import { CastList, Item, Wrapper } from './Cast.styled';
 
 export default function Cast(params) {
   const { movieId } = useParams();
@@ -22,12 +23,12 @@ export default function Cast(params) {
   }, [queryParams]);
 
   return (
-    <div className="cast-wrap">
+    <Wrapper>
       <p>Additional Information</p>
-      <ul className="cast-list">
+      <CastList>
         {cast.length !== 0 ? (
           cast.map(({ name, profile_path, character, id }) => (
-            <li className="cast-item" key={id}>
+            <Item key={id}>
               <img
                 src={
                   profile_path
@@ -41,13 +42,13 @@ export default function Cast(params) {
               <p>
                 Character: <span>{character}</span>
               </p>
-            </li>
+            </Item>
           ))
         ) : (
-          <li>Information is not available</li>
+          <Item>Information is not available</Item>
         )}
-      </ul>
-    </div>
+      </CastList>
+    </Wrapper>
   );
 }
 

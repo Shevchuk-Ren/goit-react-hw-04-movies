@@ -1,42 +1,42 @@
 .card-page {
-  display: flex;
+  /* display: flex;
   padding: 20px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12); */
 }
-span {
+/* span {
   margin-left: 5px;
-}
+} */
 .wrap-dop {
-  padding: 15px;
+  /* padding: 15px; */
 }
 .page-btn {
-  display: block;
+  /* display: block;
   width: 100px;
   height: 35px;
   background-color: snow;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
 }
 .page-btn:hover {
-  background-color: salmon;
-  color: snow;
+  /* background-color: salmon;
+  color: snow; */
 }
 .wrap-page {
-  padding: 20px;
+  /* padding: 20px; */
 }
 .description-page {
-  padding: 20px;
+  /* padding: 20px; */
 }
 .scope-page span,
 .genres-page span {
-  font-weight: 500;
+  /* font-weight: 500;
   color: snow;
   display: inline-block;
   padding: 5px;
   background-color: salmon;
-  border: 1px solid black;
+  border: 1px solid black; */
 }
-.link-page {
+/* .link-page {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.7);
   font-size: large;
@@ -47,4 +47,4 @@ span {
 .activelink {
   composes: link;
   color: salmon;
-}
+} */

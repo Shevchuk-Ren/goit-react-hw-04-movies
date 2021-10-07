@@ -1,12 +1,3 @@
-.App {
-  /* text-align: center; */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 1064px;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -51,17 +42,17 @@ li {
 }
 .form-wrap {
   /* padding: 20px; */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 .SearchForm-input {
-  width: 250px;
+  /* width: 250px;
   height: 30px;
-  margin-right: 10px;
+  margin-right: 10px; */
 }
 .form-btn {
-  width: 100px;
+  /* width: 100px;
   height: 35px;
-  background-color: snow;
+  background-color: snow; */
 }
 .form-btn:hover {
   background-color: salmon;
@@ -88,15 +79,15 @@ li {
   border-radius: 50%;
 }
 .cast-list {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 .cast-item {
-  text-align: center;
+  /* text-align: center;
   width: 250px;
   border: 1px solid black;
-  padding: 10px;
+  padding: 10px; */
 }
 .reviews-item {
   border-bottom: 1px solid black;

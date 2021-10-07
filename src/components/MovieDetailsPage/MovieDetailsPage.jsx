@@ -5,16 +5,23 @@ import PropTypes from 'prop-types';
 import {
   Route,
   useParams,
-  NavLink,
   useHistory,
   useLocation,
   useRouteMatch,
 } from 'react-router-dom';
-import './MovieDetailsPag.css';
+import {
+  BackBtn,
+  Wrapper,
+  Card,
+  CardList,
+  Item,
+  Span,
+  Description,
+} from './MovieDetailsPage.styled';
 
-const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast" */));
+const Cast = lazy(() => import('../Cast' /*webpackChunkName: "cast" */));
 const Reviews = lazy(() =>
-  import('../Reviews/Reviews' /*webpackChunkName: "reviews" */),
+  import('../Reviews' /*webpackChunkName: "reviews" */),
 );
 
 export default function MovieDetailsPage() {
@@ -64,11 +71,11 @@ export default function MovieDetailsPage() {
   };
 
   return (
-    <div className="wrap-page">
-      <button type="button" className="page-btn" onClick={handleGoBack}>
+    <Wrapper>
+      <BackBtn type="button" onClick={handleGoBack}>
         Go Back
-      </button>
-      <div className="card-page">
+      </BackBtn>
+      <Card>
         <div>
           <img
             src={createPoster()}
@@ -76,27 +83,25 @@ export default function MovieDetailsPage() {
             width="300"
           />
         </div>
-        <div className="description-page">
+        <Description>
           <h1>
             {createName() ? createName() : 'No info'}
             <span>({parseInt(movie.release_date)})</span>
           </h1>
           <p className="scope-page">
-            User scope: <span>{movie.vote_average * 10}% </span>
+            User scope: <Span>{movie.vote_average * 10}% </Span>
           </p>
           <h2>Overview</h2>
           <p>{movie.overview}</p>
           <h2>Genres</h2>
           <p className="genres-page">
             {movie.genres &&
-              movie.genres.map(({ name, id }) => <span key={id}>{name}</span>)}
+              movie.genres.map(({ name, id }) => <Span key={id}>{name}</Span>)}
           </p>
-        </div>
-      </div>
-      <div className="wrap-dop">
-        <NavLink
-          className="link-page"
-          key="1"
+        </Description>
+      </Card>
+      <CardList>
+        <Item
           to={{
             pathname: `/movies/${movieId}/cast`,
             state: { from: `${window.localStorage.getItem('url')}` },
@@ -104,10 +109,8 @@ export default function MovieDetailsPage() {
           activeClassName="activelink"
         >
           Cast
-        </NavLink>
-        <NavLink
-          className="link-page"
-          key="2"
+        </Item>
+        <Item
           to={{
             pathname: `/movies/${movieId}/reviews`,
             state: { from: `${window.localStorage.getItem('url')}` },
@@ -115,8 +118,8 @@ export default function MovieDetailsPage() {
           activeClassName="activelink"
         >
           Reviews
-        </NavLink>
-      </div>
+        </Item>
+      </CardList>
       <div>
         <Suspense
           fallback={
@@ -133,7 +136,7 @@ export default function MovieDetailsPage() {
           </Route>
         </Suspense>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 

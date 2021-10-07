@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Wrapper, Input, ButtonForm } from './SearchBar.styled.jsx';
 
 export default function Searchbar({ onSubmit }) {
   const [search, setSearch] = useState('');
@@ -20,10 +21,9 @@ export default function Searchbar({ onSubmit }) {
   };
 
   return (
-    <div className="form-wrap">
+    <Wrapper>
       <form className="form" onSubmit={handleSubmit}>
-        <input
-          className="SearchForm-input"
+        <Input
           type="text"
           value={search}
           autoComplete="off"
@@ -31,11 +31,11 @@ export default function Searchbar({ onSubmit }) {
           autoFocus
           placeholder="Search images and photos"
         />
-        <button className="form-btn" type="submit" aria-label="Search">
+        <ButtonForm className="form-btn" type="submit" aria-label="Search">
           Search
-        </button>
+        </ButtonForm>
       </form>
-    </div>
+    </Wrapper>
   );
 }
 
