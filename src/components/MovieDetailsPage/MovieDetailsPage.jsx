@@ -1,6 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
 import noUser from '../../images/noUser.jpg';
+import PropTypes from 'prop-types';
 import {
   Route,
   useParams,
@@ -9,10 +10,7 @@ import {
   useLocation,
   useRouteMatch,
 } from 'react-router-dom';
-
 import './MovieDetailsPag.css';
-// import Cast from '../Cast/Cast';
-// import Reviews from '../Reviews/Reviews';
 
 const Cast = lazy(() => import('../Cast/Cast' /*webpackChunkName: "cast" */));
 const Reviews = lazy(() =>
@@ -28,8 +26,6 @@ export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
 
-  console.log(movieId, `quy`);
-
   useEffect(() => {
     apiFetch
       .fetchApi(queryParams)
@@ -44,10 +40,6 @@ export default function MovieDetailsPage() {
   }, [queryParams]);
 
   const handleGoBack = () => {
-    console.log(url, `url`);
-    console.log(url, 'url');
-    console.log(history, `HISTORY`);
-
     if (location.pathname === url) {
       history.goBack();
       return;
@@ -60,7 +52,6 @@ export default function MovieDetailsPage() {
     return movie.title ? movie.title : movie.original_title;
   };
   const createPoster = () => {
-    console.log(`https://image.tmdb.org/t/p/original${movie.poster_path}`);
     // return movie.poster_path ?  `https://image.tmdb.org/t/p/original${movie.poster_path}` : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
     if (movie.poster_path) {
@@ -71,6 +62,7 @@ export default function MovieDetailsPage() {
 
     return noUser;
   };
+
   return (
     <div className="wrap-page">
       <button type="button" className="page-btn" onClick={handleGoBack}>
@@ -106,14 +98,9 @@ export default function MovieDetailsPage() {
           className="link-page"
           key="1"
           to={{
-            pathname: `/goit-react-hw-05-movies/movies/${movieId}/cast`,
+            pathname: `/movies/${movieId}/cast`,
             state: { from: `${window.localStorage.getItem('url')}` },
           }}
-          //  to={{
-          //   pathname: `/goit-react-hw-05-movies/movies/${movieId}/cast`,
-          //   state: { from: location },
-          // }}
-
           activeClassName="activelink"
         >
           Cast
@@ -122,14 +109,9 @@ export default function MovieDetailsPage() {
           className="link-page"
           key="2"
           to={{
-            pathname: `/goit-react-hw-05-movies/movies/${movieId}/reviews`,
+            pathname: `/movies/${movieId}/reviews`,
             state: { from: `${window.localStorage.getItem('url')}` },
           }}
-          //     to={{
-          // pathname: `/goit-react-hw-05-movies/movies/${movieId}/reviews`,
-          // state: { from:location },
-          //     }}
-
           activeClassName="activelink"
         >
           Reviews
@@ -143,10 +125,10 @@ export default function MovieDetailsPage() {
             </div>
           }
         >
-          <Route path="/goit-react-hw-05-movies/movies/:movieId/cast">
+          <Route path="/movies/:movieId/cast">
             <Cast />
           </Route>
-          <Route path="/goit-react-hw-05-movies/movies/:movieId/reviews">
+          <Route path="/movies/:movieId/reviews">
             <Reviews />
           </Route>
         </Suspense>
@@ -154,3 +136,7 @@ export default function MovieDetailsPage() {
     </div>
   );
 }
+
+MovieDetailsPage.propTypes = {
+  movieId: PropTypes.number,
+};

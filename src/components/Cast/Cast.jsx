@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
 import { useParams } from 'react-router-dom';
 import noUser from '../../images/noUser.jpg';
+import PropTypes from 'prop-types';
 
 export default function Cast(params) {
   const { movieId } = useParams();
@@ -49,3 +50,7 @@ export default function Cast(params) {
     </div>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.number,
+};

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Reviews(params) {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
-  // const [status, setStatus] = useState('idle');
-  // const history = useHistory();
 
   let queryParams = `https://api.themoviedb.org/3/movie/${movieId}/reviews?`;
 
@@ -55,3 +54,7 @@ export default function Reviews(params) {
     </div>
   );
 }
+
+Reviews.propTypes = {
+  movieId: PropTypes.number,
+};

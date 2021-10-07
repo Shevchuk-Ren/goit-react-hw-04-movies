@@ -34,14 +34,14 @@ function App() {
         }
       >
         <Switch>
-          <Route exact path="/goit-react-hw-05-movies">
+          <Route exact path="/">
             <HomePage />
           </Route>
 
-          <Route path="/goit-react-hw-05-movies/movies/:movieId">
+          <Route path="/movies/:movieId">
             <MovieDetailsPage />
           </Route>
-          <Route path="/goit-react-hw-05-movies/movies">
+          <Route path="/movies">
             <MoviesPage />
           </Route>
           <Route>

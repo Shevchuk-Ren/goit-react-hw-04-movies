@@ -30,7 +30,7 @@ export default function HomePage(params) {
                   className="home-item"
                   // to={`/goit-react-hw-05-movies/movies/${id}`}
                   to={{
-                    pathname: `/goit-react-hw-05-movies/movies/${id}`,
+                    pathname: `/movies/${id}`,
                     state: { from: location },
                   }}
                 >

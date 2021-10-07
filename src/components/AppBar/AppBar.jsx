@@ -9,14 +9,14 @@ export default function AppBar() {
         <NavLink
           exact
           className="home-link"
-          to="/goit-react-hw-05-movies"
+          to="/"
           activeClassName="activelink"
         >
           Home
         </NavLink>
         <NavLink
           className="home-link"
-          to="/goit-react-hw-05-movies/movies"
+          to="/movies"
           activeClassName="activelink"
         >
           Movies

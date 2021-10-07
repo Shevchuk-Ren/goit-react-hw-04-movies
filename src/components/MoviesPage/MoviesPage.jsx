@@ -21,7 +21,6 @@ export default function MoviesPage(params) {
   const location = useLocation();
 
   const { url } = useRouteMatch();
-  console.log(url);
   let queryParams = `https://api.themoviedb.org/3/search/movie?`;
 
   useEffect(() => {
@@ -46,21 +45,11 @@ export default function MoviesPage(params) {
       .catch(error => {
         console.log(error);
       });
-
-    //  if (location.search) {
-    //   console.log(`воть`)
-    // }
-
-    // return () => {
-    //     cleanup
-    // }
   }, [location.search, query, queryParams, setMovies]);
 
   const handleSubmit = search => {
-    //  window.localStorage.setItem('search', search);
     window.localStorage.setItem('url', url + `?query=${search}`);
     setQuery(search);
-    console.log(url, `url`);
   };
 
   if (status === 'idle') {
@@ -90,9 +79,8 @@ export default function MoviesPage(params) {
               <li key={id}>
                 <NavLink
                   className="movies-item"
-                  // to={`/goit-react-hw-05-movies/movies/${id}`}
                   to={{
-                    pathname: `/goit-react-hw-05-movies/movies/${id}`,
+                    pathname: `/movies/${id}`,
                     state: { from: location },
                   }}
                 >
@@ -107,31 +95,4 @@ export default function MoviesPage(params) {
       </div>
     );
   }
-
-  // return (
-  //   <div className="movies-wrap">
-  //     <Searchbar onSubmit={handleSubmit}></Searchbar>
-
-  //     {movies.length !== 0 ? (
-  //       <ul className="movies-list">
-  //         {movies.map(({ name, original_title, id }) => (
-  //           <li key={id}>
-  //             <NavLink
-  //               className="movies-item"
-  //               // to={`/goit-react-hw-05-movies/movies/${id}`}
-  //                to={{
-  //           pathname: `/goit-react-hw-05-movies/movies/${id}`,
-  //           state: { from: location },
-  //         }}
-  //             >
-  //               {name ? name : original_title}
-  //             </NavLink>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     ) : (
-  //       <p>Enter correct film's name</p>
-  //     )}
-  //   </div>
-  // );
 }

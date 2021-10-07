@@ -1,8 +1,8 @@
+   
 [build]
-publish = "build"
+  publish = "build"
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
-
+  from = "/goit-react-hw-05-movies*"
+  to = "/index.html"
+  status = 200

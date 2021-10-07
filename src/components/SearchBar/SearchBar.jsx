@@ -16,18 +16,7 @@ export default function Searchbar({ onSubmit }) {
 
     onSubmit(search);
     history.push({ ...location, search: `query=${search}` });
-
-    // if (location.search !== '') {
-
-    // }
-    // console.log(search, `daaa`)
-    // if (search.trim() === '') {
-
     setSearch('');
-
-    //     return;
-
-    // }
   };
 
   return (
@@ -53,5 +42,4 @@ export default function Searchbar({ onSubmit }) {
 Searchbar.propTypes = {
   search: PropTypes.string,
   onSubmit: PropTypes.func,
-  onChange: PropTypes.func,
 };
