@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import Searchbar from '../SearchBar';
 import { Item, Wrapper } from './MoviesPage.styled';
 
@@ -33,7 +33,6 @@ export default function MoviesPage(params) {
       setStatus('resolved');
     }
     if (!query) {
-      console.log(`вы зашли в movies`);
       return;
     }
     setStatus('pending');

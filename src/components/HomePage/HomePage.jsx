@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import apiFetch from '../../services/fetch/fetch-api';
-import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
+import { useRouteMatch, useLocation } from 'react-router-dom';
 import { Item, Wrapper } from './HomePage.styled';
 
 export default function HomePage(params) {

@@ -5,7 +5,6 @@ function fetchApi(URL, search) {
   return fetch(
     `${URL}api_key=${KEY}&language=en-US&page=1&include_adult=false=quere&query=${search}`,
   ).then(res => {
-    console.log(res, `add`);
     if (res.ok) {
       return res.json();
     }

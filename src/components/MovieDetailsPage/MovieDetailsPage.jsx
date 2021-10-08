@@ -29,7 +29,6 @@ export default function MovieDetailsPage() {
   let queryParams = `https://api.themoviedb.org/3/movie/${movieId}?`;
 
   const [movie, setMovie] = useState([]);
-  const { url } = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
 
@@ -37,8 +36,6 @@ export default function MovieDetailsPage() {
     apiFetch
       .fetchApi(queryParams)
       .then(movie => {
-        console.log(movie.genres, `movie`);
-
         setMovie(movie);
       })
       .catch(error => {
@@ -47,8 +44,8 @@ export default function MovieDetailsPage() {
   }, [queryParams]);
 
   const handleGoBack = () => {
-    if (location.pathname === url) {
-      history.goBack();
+    if (!location.state) {
+      history.push('/');
       return;
     }
 
@@ -59,8 +56,6 @@ export default function MovieDetailsPage() {
     return movie.title ? movie.title : movie.original_title;
   };
   const createPoster = () => {
-    // return movie.poster_path ?  `https://image.tmdb.org/t/p/original${movie.poster_path}` : `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
-
     if (movie.poster_path) {
       return `https://image.tmdb.org/t/p/original${movie.poster_path}`;
     } else if (movie.backdrop_path) {
