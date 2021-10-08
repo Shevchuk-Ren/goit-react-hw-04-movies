@@ -4,18 +4,18 @@ import AppBar from '../AppBar';
 import { Container } from './App.styled';
 
 const HomePage = lazy(() =>
-  import('../HomePage' /*webpackChunkName: "home-page" */),
+  import('../../views/HomePageView' /*webpackChunkName: "home-page" */),
 );
 const MovieDetailsPage = lazy(() =>
   import(
-    '../MovieDetailsPage/MovieDetailsPage' /*webpackChunkName: "movie-detail-page" */
+    '../../views/MovieDetailsView' /*webpackChunkName: "movie-detail-page" */
   ),
 );
 const MoviesPage = lazy(() =>
-  import('../MoviesPage' /*webpackChunkName: "movie-page" */),
+  import('../../views/MoviesPageView' /*webpackChunkName: "movie-page" */),
 );
 const NotFoundView = lazy(() =>
-  import('../NotFoundView/NotFoundView' /*webpackChunkName: "not-found" */),
+  import('../../views/NotFoundView' /*webpackChunkName: "not-found" */),
 );
 
 function App() {

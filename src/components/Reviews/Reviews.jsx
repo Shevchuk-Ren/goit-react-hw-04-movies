@@ -27,7 +27,6 @@ export default function Reviews(params) {
         ? avatar.slice(1)
         : `https://image.tmdb.org/t/p/original${avatar}`;
     }
-    //  return avatar.startsWith('https') ? avatar :`https://image.tmdb.org/t/p/original${avatar}`;
   };
 
   return (

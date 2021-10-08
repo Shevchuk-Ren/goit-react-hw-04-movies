@@ -3,6 +3,6 @@
   publish = "build"
 
 [[redirects]]
-  from = "/goit-react-hw-05-movies*"
+  from = "/*"
   to = "/index.html"
   status = 200
